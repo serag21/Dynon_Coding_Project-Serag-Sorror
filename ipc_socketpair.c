@@ -72,6 +72,7 @@ for (int i = 0; i < NUM_MESSAGES_TO_SEND; ++i) {
             }
         }
         //}
+        
 
         close(sv[1]);
         exit(EXIT_SUCCESS);
