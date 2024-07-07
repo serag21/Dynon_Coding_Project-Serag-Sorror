@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/seragsorror/Desktop/Github Files/Dynon_Coding_Project-Serag-Sorror",
+      "program": "/Users/seragsorror/Desktop/Github Files/Dynon_Coding_Project-Serag-Sorror/build/Debug/outDebug"
+    }
+  ]
+}
