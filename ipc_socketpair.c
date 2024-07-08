@@ -9,7 +9,7 @@
 
 struct IPCDataStruct dataToSend[2] = { //Testing Mechanism - update to adjust tests
             {1, 1.1f, "sampleString1", type1},
-            {2, 2.1f, "sampleString2", type3}
+            {2, 2.1f, "*!sampleString\twithSpecialChars!*", type3}
 };
 
 const char* enumToString(Types type) {
@@ -64,9 +64,8 @@ void receiveData(int socket) {
 
         //Printing 10 diffrent versions of received data
         for (int j = 0; j < 10; ++j) {
-            char combinedString[50];
+            char combinedString[100];
             sprintf(combinedString, "%s_%d", receivedData.str, j);
-            //snprintf(combinedString, sizeof(combinedString), "%s_%d", receiveData.str, j);
             printf("integer: %d, float: %.2f, string: %s, typeEnum: %s\n",
             receivedData.num + j,
             receivedData.fl + j * 0.1f,
@@ -89,7 +88,7 @@ int main() {
     if (pid == -1) {
         perror("fork");
         exit(EXIT_FAILURE);
-    } else if (pid == 0) { //Must be child process - Sender
+    } else if (pid == 0) { //pid = 0 so must be child process - Sender
         close(sv[0]); //close unused process
 
         for (int i = 0; i < NUM_MESSAGES_TO_SEND; ++i) {
@@ -97,12 +96,12 @@ int main() {
         }
         close(sv[1]);
         exit(EXIT_SUCCESS);
-    } else { //pid must be 1 aka parent process - Receiver
+    } else { //pid = 1 so must be parent process - Receiver
         close(sv[1]); //close unused process
 
         receiveData(sv[0]);
         close(sv[0]);
-        wait(NULL); //wait for child process to finish
+        wait(NULL); //wait for child process to finish to avoid zombie processes
     }
 
     return 0;

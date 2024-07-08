@@ -4,6 +4,6 @@ typedef enum {type1, type2, type3} Types;
 struct IPCDataStruct {
     int num;
     float fl;
-    char str[30];
+    char str[100];
     Types type;
 }; 
